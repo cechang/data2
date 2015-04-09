@@ -10,29 +10,75 @@ package data2;
  *
  * @author Cedric
  */
-public interface FiniteBag<T extends Comparable<T>> extends Iterable<T> {
+
+/**
+ * FiniteBag represents a polymorphic multiset
+ * @param <T> The generic datatype that the FiniteBag will hold.
+ */
+public interface FiniteBag<T extends Comparable<T>> {
     
     public String toString();
     
-    public boolean isEmptyHuh(T thing);
+    /**
+     * @return boolean if the bag is empty
+     */
+    public boolean isEmptyHuh();
     
-    public int cardinality(T thing);
+    /** 
+     * @return integer that represents the number of elements in the bag
+     */
+    public int cardinality();
     
+    /**
+     * @return a fresh empty bag
+     */
     public FiniteBag<T> empty();
     
+    /**
+     * @param thing the element T that is being tested
+     * @return boolean if thing is in the bag
+     */
     public boolean member(T thing);
     
+    /**
+     * @param thing the element T that is being added
+     * @return new bag with thing added once
+     */  
     public FiniteBag<T> add(T thing);
     
+    /**
+     * @param thing the element T that is being removed
+     * @return new bag with thing removed once
+     */
     public FiniteBag<T> remove(T thing);
     
-    public FiniteBag<T> union (FiniteBag<T> bag);
+    /**
+     * @param otherBag the FiniteBag that is being united
+     * @return a new bag that is the union of bag and this
+     */    
+    public FiniteBag<T> union (FiniteBag<T> otherBag);
     
-    public FiniteBag<T> inter (FiniteBag<T> bag);
+    /**
+     * @param otherBag the FiniteBag that is being intersected
+     * @return a new bag that is the intersection of bag and this
+     */  
+    public FiniteBag<T> inter (FiniteBag<T> otherBag);
     
-    public FiniteBag<T> diff (FiniteBag<T> bag);
+    /**
+     * @param otherBag the FiniteBag that is being tested
+     * @return a new bag that is the difference of bag and this
+     */  
+    public FiniteBag<T> diff (FiniteBag<T> otherBag);
     
-    public boolean equal (FiniteBag<T> bag);
+    /**
+     * @param otherBag the FiniteBag that is being tested
+     * @return a boolean if bag and this are equal
+     */  
+    public boolean equal (FiniteBag<T> otherBag);
     
-    public boolean subset (FiniteBag<T> bag);
+    /**
+     * @param otherBag the FiniteBag that is being tested
+     * @return a boolean if bag is a subset of this
+     */  
+    public boolean subset (FiniteBag<T> otherBag);
 }
