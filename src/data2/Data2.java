@@ -9,6 +9,11 @@ package data2;
  *
  * @author Cedric
  */
+
+/**
+ * Main method where testing occurs
+ * @author Cedric
+ */
 public class Data2 {
 
     /**
@@ -79,6 +84,11 @@ public class Data2 {
         System.out.println("Test2 equals Test3: " + myTest2.equal(myTest3) + " should be true");
         System.out.println("Depth of Test4 is " + myTest4.depth() + " should be 3");
         
+        Test randTest = new Test();
+        System.out.println(randTest.intTestProperty1(1000, 10));
+        System.out.println(randTest.intTestProperty2(1000, 10));
+        System.out.println(randTest.intTestProperty3(1000, 10));
+        System.out.println(randTest.intTestProperty4(1000, 10));
     }
     
 }
