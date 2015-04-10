@@ -54,6 +54,7 @@ public class Data2 {
                         4       9
         */
         
+        //Preliminary tests
         System.out.println("empty myTest1 " +myTest1.empty() + " should be ");
         System.out.println("card of myTest1 is " +myTest1.cardinality() + " should be 5");
         System.out.println("mult of 6 in myTest2 is " +myTest2.getMult(6) + " should be 0 ");
@@ -76,6 +77,7 @@ public class Data2 {
         System.out.println("Test3 subset of Test2: " + myTest3.subset(myTest2) + " should be true ");
         System.out.println("Test2 equals Test1: " + myTest2.equal(myTest1) + " should be false");
         System.out.println("Test2 equals Test3: " + myTest2.equal(myTest3) + " should be true");
+        System.out.println("Depth of Test4 is " + myTest4.depth() + " should be 3");
         
     }
     

@@ -15,7 +15,7 @@ package data2;
  * FiniteBag represents a polymorphic multiset
  * @param <T> The generic datatype that the FiniteBag will hold.
  */
-public interface FiniteBag<T extends Comparable<T>> {
+public interface FiniteBag<T extends Comparable<T>> extends Sequenced<T>{
     
     public String toString();
     
@@ -34,15 +34,21 @@ public interface FiniteBag<T extends Comparable<T>> {
      * @return integer that represents the multiplicity of the key
      */
     public int getMult(T thing);
+    
     /**
      * @return a fresh empty bag
      */
     public FiniteBag<T> empty();
     
     /**
+     * @return the height of the bag
+     */
+    public int depth();
+    
+    /**
      * @param thing the element T that is being tested
      * @return boolean if thing is in the bag
-     */
+     */   
     public boolean member(T thing);
     
     /**
@@ -100,4 +106,31 @@ public interface FiniteBag<T extends Comparable<T>> {
      * @return a boolean if bag is a subset of this
      */  
     public boolean subset (FiniteBag<T> otherBag);
+    
+    /**
+     * Rotates the FiniteBag to the right. So what was in the left position 
+     * on the branch is now in the head and the head is in the right position 
+     * on the branch along with everything that was in the right position previously.
+     *
+     * @return a new FiniteBag with the same objects as the old one but rotated to the right
+     */
+    public FiniteBag<T> rotateR();
+    
+    /** 
+     * Performs the same function as rotateRight except it rotates the tree
+     * to the left
+     *
+     * @return a new FiniteBag with the same elements as the old one but rotated to the left
+     */
+    public FiniteBag<T> rotateL();
+    
+    /**
+     * Checks each node in the tree from bottom up to insure that at any key the difference 
+     * between the height of its left and right children is never 
+     * greater than 1. In cases of larger differences, rotateR() or
+     * rotateL() are called, depending on which branch is longer.
+     *
+     * @return a balanced AVL tree
+     */
+    public FiniteBag<T> makeAVL();
 }

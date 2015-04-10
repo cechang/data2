@@ -14,7 +14,7 @@ package data2;
  * EmptyNode represents the empty node at any end of bag
  * @param <T> The generic datatype that the FiniteBag will hold.
  */
-public class EmptyNode<T extends Comparable<T>> implements FiniteBag<T>{
+public class EmptyNode<T extends Comparable<T>> implements FiniteBag<T> {
     
     // constructor for EmptyNode  
     EmptyNode(){        
@@ -32,6 +32,13 @@ public class EmptyNode<T extends Comparable<T>> implements FiniteBag<T>{
      */
     public boolean isEmptyHuh() {
         return true;
+    }
+    
+    /**
+     * @return 0 since EmptyNode does not add to height
+     */
+    public int depth(){
+	return 0;
     }
     
     /** 
@@ -138,4 +145,28 @@ public class EmptyNode<T extends Comparable<T>> implements FiniteBag<T>{
         return true;
     }
     
+    /**
+     * @return this since no rotation on EmptyNodes
+     */  
+    public FiniteBag<T> rotateR(){
+	return this;
+    }
+    
+    /**
+     * @return this since no rotation on EmptyNodes
+     */ 
+    public FiniteBag<T> rotateL(){
+	return this;
+    }
+    
+    /**
+     * @return this since EmptyNodes have balance
+     */ 
+    public FiniteBag<T> makeAVL(){
+	return this;
+    }
+    
+    public Sequence<T> seq(){
+	return (Sequence<T>) this;
+    }
 }
