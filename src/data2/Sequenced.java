@@ -11,5 +11,9 @@ package data2;
  */
 public interface Sequenced<T extends Comparable> {
     
+    /**
+     * @return a new sequence comprised of the elements that are within 
+     * whatever it is called upon
+     */
     public Sequence seq();
 }

@@ -59,7 +59,7 @@ public class Data2 {
                         4       9
         */
         
-        //Preliminary tests
+        //Preliminary Tests
         System.out.println("empty myTest1 " +myTest1.empty() + " should be ");
         System.out.println("card of myTest1 is " +myTest1.cardinality() + " should be 5");
         System.out.println("mult of 6 in myTest2 is " +myTest2.getMult(6) + " should be 0 ");
@@ -68,7 +68,7 @@ public class Data2 {
         System.out.println("add 8 to Test1: " + myTest1.add(8) + " should be 3(1) 6(1) 7(3) 8(1)");
         System.out.println("add 3 to Test1: " + myTest1.add(3) + " should be 3(2) 6(1) 7(3)");
         System.out.println("add 6 to Test1: " + myTest1.add(6) + " should be 3(1) 6(2) 7(3)");
-        System.out.println("add 7 to Test1: " + myTest1.add(7) + " should be 3(1) 6(2) 7(4)");
+        System.out.println("add 7 to Test1: " + myTest1.add(7) + " should be 3(1) 6(1) 7(4)");
         System.out.println("unite Test1 and Test2: " + myTest2.union(myTest1) + " should be 3(1) 4(1) 5(1) 6(1) 7(4)");
         System.out.println("unite Test2 and Test1: " + myTest1.union(myTest2) + " should be 3(1) 4(1) 5(1) 6(1) 7(4)");
         System.out.println("remove 7 from Test1: " + myTest1.remove(7,1) + " should be 3(1) 6(1) 7(2)");
@@ -84,11 +84,14 @@ public class Data2 {
         System.out.println("Test2 equals Test3: " + myTest2.equal(myTest3) + " should be true");
         System.out.println("Depth of Test4 is " + myTest4.depth() + " should be 3");
         
+        //Generated Tests
         Test randTest = new Test();
         System.out.println(randTest.intTestProperty1(1000, 10));
         System.out.println(randTest.intTestProperty2(1000, 10));
         System.out.println(randTest.intTestProperty3(1000, 10));
         System.out.println(randTest.intTestProperty4(1000, 10));
+        
+        System.out.println(randTest.strTestProperty1(1000, 10));
     }
     
 }

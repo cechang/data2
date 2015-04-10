@@ -45,9 +45,9 @@ public class Test<T extends Comparable<T>> {
         }
         return testBag;
     }
-    //"Property 1: member (add t x) y = true <-> x = y \/ member t y = true"
+    
     /**
-     *
+     *"Property 1: member (add t x) y = true &lt;-&gt; x = y \/ member t y = true"
      * 
      * @param t number of tests run
      * @param n number of integers in each bag
@@ -126,7 +126,7 @@ public class Test<T extends Comparable<T>> {
         return "hurray " + t + " tests worked";
     }    
     
-    public static FiniteBag randStringBag(int n) {
+    public static FiniteBag randStrBag(int n) {
         FiniteBag stringBag = new EmptyNode();
         String[] stringArray;
         stringArray = new String[26];
@@ -163,4 +163,28 @@ public class Test<T extends Comparable<T>> {
         }
         return stringBag;
     }
+    
+    public String strTestProperty1(int t, int n) {
+        for (int i = 0; i < t; i++) {
+            int x = (int) ((Math.round(10 * Math.random())));
+            int y = (int) ((Math.round(10 * Math.random())));
+            Test randTest = new Test();
+            FiniteBag tester1 = randTest.randStrBag(n);
+            FiniteBag tester2 = tester1.add(x);
+            if (tester2.member(y)) {
+                if (tester1.member(y) || (x == y)) {
+                } 
+                else {
+                    return ("you can't code, " + x + " and " + y + "fails with " + tester1 );
+                }
+            } 
+            else {
+                if (tester1.member(y) || (x == y)) {
+                    return ("you can't code, " + x + " and " + y + " fails with " + tester1 );
+                }
+            }
+        }
+        return "hurray " + t + " tests worked";
+    }
+   
 }
