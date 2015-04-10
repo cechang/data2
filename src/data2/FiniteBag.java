@@ -27,7 +27,7 @@ public interface FiniteBag<T extends Comparable<T>> {
     /** 
      * @return integer that represents the number of elements in the bag
      */
-    public int cardinality();
+    public int cardinality();   
     
     /** 
      * @param thing is the key you are getting the multiplicity of
@@ -52,15 +52,29 @@ public interface FiniteBag<T extends Comparable<T>> {
     public FiniteBag<T> add(T thing);
     
     /**
+     * @param thing the element T that is being added
+     * @param n multiplicity of added number
+     * @return new bag with thing added once
+     */      
+    public FiniteBag<T> add(T thing, int n);
+    
+    /**
      * @param thing the element T that is being removed
      * @return new bag with thing removed once
      */
-    public FiniteBag<T> remove(T thing);
-    
+    public FiniteBag<T> remove(T thing);    
+       
+    /**
+     * @param thing the element T that is being removed
+     * @param n multiplicity of added number
+     * @return new bag with thing removed once
+     */
+    public FiniteBag<T> remove(T thing, int n);   
+            
     /**
      * @param otherBag the FiniteBag that is being united
      * @return a new bag that is the union of bag and this
-     */    
+     */         
     public FiniteBag<T> union (FiniteBag<T> otherBag);
     
     /**

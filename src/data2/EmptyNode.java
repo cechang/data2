@@ -71,6 +71,17 @@ public class EmptyNode<T extends Comparable<T>> implements FiniteBag<T>{
     }
     
     /**
+     * @param thing the element that is being tested
+     * @param n multiplicity of added number
+     * @return a new bag with a KeyNode replacing the EmptyNode it hit. The new key is thing
+     */
+    public FiniteBag<T> add(T thing, int n){
+        FiniteBag<T> newEmpty = new EmptyNode();
+        FiniteBag<T> newBag = new KeyNode<T>(newEmpty, thing, n, newEmpty);
+        return newBag;                
+    }
+    
+    /**
      * @param otherBag the FiniteBag that is being united
      * @return otherBag since EmptyNodes don't contain anything
      */
@@ -83,6 +94,15 @@ public class EmptyNode<T extends Comparable<T>> implements FiniteBag<T>{
      * @return this since EmptyNodes don't contain anything
      */
     public FiniteBag<T> remove(T thing){
+        return this;
+    }
+    
+    /**
+     * @param thing the element T that is being removed
+     * @param n multiplicity of added number
+     * @return this since EmptyNodes don't contain anything
+     */
+    public FiniteBag<T> remove(T thing,int n){
         return this;
     }
     
