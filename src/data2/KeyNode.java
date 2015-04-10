@@ -23,6 +23,16 @@ public class KeyNode<T extends Comparable<T>> implements FiniteBag<T> {
         this.right = right;       
     }
     
+    public int getMult(T thing) {
+        if (thing.compareTo(key) == 0) {
+            return mult;
+        } else if (thing.compareTo(key) < 0) {
+            return this.left.getMult(thing);
+        } else {
+            return this.right.getMult(thing);
+        }
+    }
+    
     /**
      * @return a fresh empty bag
      */
@@ -39,22 +49,20 @@ public class KeyNode<T extends Comparable<T>> implements FiniteBag<T> {
     }
     
     public boolean member(T thing){
-        if(thing == this.key){
+        if(this.key.equals(thing)){
             return true;
         }
-        else if(thing > this.key){
-            return this.right.member(thing);
-        }
         else{
-            return this.left.member(thing);
+            return this.left.member(thing) || this.right.member(thing) ;
         }
     }
     
+
     public FiniteBag<T> add(T thing){
-        if(thing == this.key){
+        if(this.member(thing)){
             return new KeyNode(this.left, this.key, this.mult + 1, this.right.add(thing));
         }
-        else if(thing > this.key){
+        else if(thing.compareTo(key) > 0){
             return new KeyNode(this.left, this.key, this.mult, this.right.add(thing));
         }
         else{
@@ -64,18 +72,18 @@ public class KeyNode<T extends Comparable<T>> implements FiniteBag<T> {
     
     public String toString() {
         return this.left.toString() + ", " +
-                this.key + " " +
-                "happens " this.mult + "times, "
+                this.key +
+                " happens " + this.mult + "time(s), "
                 this.right.toString();
     }
     
-    public FiniteBag<T> union(FiniteBag<T> bag){
-        FiniteBag<T> newBag = bag.add(this.key);
+    public FiniteBag<T> union(FiniteBag<T> otherbag){
+        FiniteBag<T> newBag = otherbag.add(this.key);
         return (this.right.union(this.left)).union(newBag);
     }
     
     public FiniteBag<T> remove(T thing){
-        if(thing == this.key){
+        if(this.member(thing)){
             if(this.mult == 0){                
                 return this.left.union(this.right);
             }
@@ -83,7 +91,7 @@ public class KeyNode<T extends Comparable<T>> implements FiniteBag<T> {
                 return new KeyNode(this.left, this.key, this.mult - 1, this.right);
             }
         }
-        else if(thing > this.key){
+        else if(thing.compareTo(key) > 0){
             return new KeyNode(this.left, this.key, this.mult, this.right.remove(thing));
         }
         else{
@@ -91,13 +99,17 @@ public class KeyNode<T extends Comparable<T>> implements FiniteBag<T> {
         }
     }
     
-    public FiniteBag<T> inter(FiniteBag<T> bag){
-        if(bag.member(this.key) == true){
-            if()
-            return new KeyNode(this.left.inter(bag), this.key,this.mult, this.right.inter(bag));
+    public FiniteBag<T> inter(FiniteBag<T> otherBag){
+        if(otherBag.member(this.key)){
+            if(otherBag.getMult(key) > this.getMult(key)){
+                return new KeyNode(this.left.inter(otherBag), this.key, this.getMult(key), this.right.inter(otherBag));
+            }
+            else{
+                return new KeyNode(this.left.inter(otherBag), this.key, otherBag.getMult(key), this.right.inter(otherBag));
+            }
         }
         else{
-            return this.remove(this.key).inter(bag);                    
+            return this.remove(this.key).inter(otherBag);                    
         }
     }
     

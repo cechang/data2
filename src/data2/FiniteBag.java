@@ -29,6 +29,11 @@ public interface FiniteBag<T extends Comparable<T>> {
      */
     public int cardinality();
     
+    /** 
+     * @param thing is the key you are getting the multiplicity of
+     * @return integer that represents the multiplicity of the key
+     */
+    public int getMult(T thing);
     /**
      * @return a fresh empty bag
      */

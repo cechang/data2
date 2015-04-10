@@ -34,6 +34,13 @@ public class EmptyNode<T extends Comparable<T>> implements FiniteBag<T>{
         return true;
     }
     
+    /** 
+     * @param thing is the key you are getting the multiplicity of
+     * @return 0 since thing was not found in the bag
+     */
+    public int getMult(T thing){
+        return 0;
+    }
     
     public String toString() {
         return "";
@@ -58,7 +65,8 @@ public class EmptyNode<T extends Comparable<T>> implements FiniteBag<T>{
      * @return a new bag with a KeyNode replacing the EmptyNode it hit. The new key is thing
      */
     public FiniteBag<T> add(T thing){
-        FiniteBag<T> newBag = new KeyNode<T>(this, thing, this);
+        FiniteBag<T> newEmpty = new EmptyNode();
+        FiniteBag<T> newBag = new KeyNode<T>(newEmpty, thing, 1, newEmpty);
         return newBag;                
     }
     
