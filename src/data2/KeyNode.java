@@ -15,7 +15,7 @@ package data2;
  * @param <T> The generic datatype that the FiniteBag will hold.
  * 
  */
-public class KeyNode<T extends Comparable<T>> implements FiniteBag<T> {
+public class KeyNode<T extends Comparable<T>> implements FiniteBag<T>, Sequence<T> {
         
     FiniteBag<T> left;
     T key;
@@ -107,10 +107,10 @@ public class KeyNode<T extends Comparable<T>> implements FiniteBag<T> {
             return new KeyNode(this.left, this.key, this.mult + 1, this.right);
         }
         else if(thing.compareTo(key) > 0){
-            return new KeyNode(this.left, this.key, this.mult, this.right.add(thing));
+            return new KeyNode(this.left, this.key, this.mult, this.right.add(thing)).makeAVL();
         }
         else{
-            return new KeyNode(this.left.add(thing), this.key, this.mult, this.right);
+            return new KeyNode(this.left.add(thing), this.key, this.mult, this.right).makeAVL();
         }
     }
     
@@ -124,10 +124,10 @@ public class KeyNode<T extends Comparable<T>> implements FiniteBag<T> {
             return new KeyNode(this.left, this.key, this.mult + n, this.right);
         }
         else if(thing.compareTo(key) > 0){
-            return new KeyNode(this.left, this.key, this.mult, this.right.add(thing, n));
+            return new KeyNode(this.left, this.key, this.mult, this.right.add(thing, n)).makeAVL();
         }
         else{
-            return new KeyNode(this.left.add(thing, n), this.key, this.mult, this.right);
+            return new KeyNode(this.left.add(thing, n), this.key, this.mult, this.right).makeAVL();
         }
     }
     
@@ -155,10 +155,10 @@ public class KeyNode<T extends Comparable<T>> implements FiniteBag<T> {
             }
         }
         else if(thing.compareTo(key) > 0){
-            return new KeyNode(this.left, this.key, this.mult, this.right.remove(thing));
+            return new KeyNode(this.left, this.key, this.mult, this.right.remove(thing)).makeAVL();
         }
         else{
-            return new KeyNode(this.left.remove(thing), this.key, this.mult, this.right);
+            return new KeyNode(this.left.remove(thing), this.key, this.mult, this.right).makeAVL();
         }
     }
     
@@ -177,10 +177,10 @@ public class KeyNode<T extends Comparable<T>> implements FiniteBag<T> {
             }
         }
         else if(thing.compareTo(key) > 0){
-            return new KeyNode(this.left, this.key, this.mult, this.right.remove(thing,n));
+            return new KeyNode(this.left, this.key, this.mult, this.right.remove(thing,n)).makeAVL();
         }
         else{
-            return new KeyNode(this.left.remove(thing,n), this.key, this.mult, this.right);
+            return new KeyNode(this.left.remove(thing,n), this.key, this.mult, this.right).makeAVL();
         }
     }
     
@@ -198,7 +198,7 @@ public class KeyNode<T extends Comparable<T>> implements FiniteBag<T> {
             }
         }
         else{
-            return this.remove(this.key).inter(otherBag);                    
+            return this.remove(this.key).inter(otherBag).makeAVL();                    
         }
     }
     
@@ -208,11 +208,11 @@ public class KeyNode<T extends Comparable<T>> implements FiniteBag<T> {
      */  
     public FiniteBag<T> diff(FiniteBag<T> otherBag){
         if(this.getMult(key) >= otherBag.getMult(key)){
-            return (this.remove(this.key)).diff(otherBag.remove(this.key));
+            return (this.remove(this.key)).diff(otherBag.remove(this.key)).makeAVL();
         }
         else{
             FiniteBag<T> removed = otherBag.remove(this.key, this.getMult(this.key));
-            return (left.union(right)).diff(removed);
+            return (left.union(right)).diff(removed).makeAVL();
         }
     }
     
@@ -279,17 +279,18 @@ public class KeyNode<T extends Comparable<T>> implements FiniteBag<T> {
 	return rotated;
     }
     
-    public Sequence<T> seq(){
-	return new BagSeq<T>(new MakeSeq<T>(this.left.seq(),
-					    this.right.seq()),
-			     this.key,
-			     this.mult);
+    public Sequence<T> seq() {
+        return this;
     }
-    public T here(){
-	return this.seq().here();
+
+    public T here() {
+        return this.key;
     }
-    public Sequence<T> next(){
-	return this.seq().next();
+
+    public Sequence<T> next() {
+        return new MakeSeq<T>(left.seq(), right.seq());
     }
+    
+
     
 }

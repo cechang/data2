@@ -18,20 +18,20 @@ public class MakeSeq <T extends Comparable<T>> implements Sequence<T>{
 	this.right = right;
     }
     public T here(){
-	if (!this.left.isEmptyHuh()){
-	    return this.left.here();
-	} else {
+	if (this.left.isEmptyHuh()){
 	    return this.right.here();
+	} else {
+	    return this.left.here();
 	}
     }
     public boolean isEmptyHuh(){
 	return this.left.isEmptyHuh() && this.right.isEmptyHuh();
     }
     public Sequence<T> next(){
-	if (!this.left.isEmptyHuh()){
-	    return new MakeSeq<T>(this.left.next(), this.right);
+	if (this.left.isEmptyHuh()){
+	    return new MakeSeq<T>(this.left, this.right.next());
 	} else {
-	    return this.right.next();
+	    return new MakeSeq<T>(this.left.next(), this.right);
 	}
     }
     public Sequence<T> seq(){

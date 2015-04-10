@@ -14,7 +14,7 @@ package data2;
  * EmptyNode represents the empty node at any end of bag
  * @param <T> The generic datatype that the FiniteBag will hold.
  */
-public class EmptyNode<T extends Comparable<T>> implements FiniteBag<T> {
+public class EmptyNode<T extends Comparable<T>> implements FiniteBag<T> , Sequence<T>{
     
     // constructor for EmptyNode  
     EmptyNode(){        
@@ -167,6 +167,14 @@ public class EmptyNode<T extends Comparable<T>> implements FiniteBag<T> {
     }
     
     public Sequence<T> seq(){
-	return (Sequence<T>) this;
+	return this;
+    }
+    
+    public T here(){
+        throw new RuntimeException("empty");
+    }
+    
+    public Sequence<T> next(){
+        return this;
     }
 }
